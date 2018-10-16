@@ -3,8 +3,6 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.paint.ImagePattern;
 
 import java.util.Collections;
@@ -37,6 +35,15 @@ public class Globals {
         gameObjects = new LinkedList<>();
         newGameObjects = new LinkedList<>();
         oldGameObjects = new LinkedList<>();
+    }
+
+    public static GameEntity getSnakeHead() {
+        for (GameEntity entity : gameObjects) {
+            if (entity instanceof SnakeHead) {
+                return entity;
+            }
+        }
+        return null;
     }
 
     public static void addGameObject(GameEntity toAdd) {

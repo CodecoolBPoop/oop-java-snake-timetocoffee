@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.enemies;
 
+import com.codecool.snake.Game;
 import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
@@ -10,6 +11,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
+
+import static java.lang.Math.sqrt;
 
 // a simple enemy TODO make better ones.
 public class ChasingEnemy extends GameEntity implements Animatable, Interactable {
@@ -26,10 +29,10 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-
-        double direction = rnd.nextDouble() * 360;
-        setRotate(direction);
-        heading = Utils.directionToVector(direction, speed);
+//
+//        double direction = rnd.nextDouble() * 360;
+//        setRotate(direction);
+//        heading = Utils.directionToVector(direction, speed);
     }
 
     @Override
@@ -38,8 +41,14 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 //            destroy();
 
         }
-        setX(getX() + heading.getX());
-        setY(getY() + heading.getY());
+
+//        GameEntity sneakhead = Globals.getSnakeHead();
+//        Double headingSnakeHeadX = sneakhead.getX()-getX()/ sqrt((getX()*getX()) + getY()*getY())*100;
+//        Double headingSnakeHeadY = sneakhead.getY()-getY()/sqrt((getX()*getX()) + getY()*getY())*100;
+//        setX(getX() + headingSnakeHeadX);
+//        setY(getY() + headingSnakeHeadY);
+        setX(getX() + 1);
+        setY(getY() + 1);
     }
 
     @Override
