@@ -27,10 +27,9 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-
-//        double direction = rnd.nextDouble() * 360;
-//        setRotate(direction);
-//        heading = Utils.directionToVector(direction, speed);
+        double direction = rnd.nextDouble() * 360;
+        setRotate(direction);
+        heading = Utils.directionToVector(direction, speed);
     }
 
     @Override
