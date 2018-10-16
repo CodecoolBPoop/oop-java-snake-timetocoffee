@@ -14,6 +14,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         Game game = new Game();
 
+        primaryStage.setMaximized(true);
+//        primaryStage.setResizable(false);
         primaryStage.setTitle("Snake Game");
         primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
         primaryStage.show();

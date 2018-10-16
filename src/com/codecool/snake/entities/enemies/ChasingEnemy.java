@@ -1,9 +1,9 @@
 package com.codecool.snake.entities.enemies;
 
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
-import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
+import com.codecool.snake.entities.Animatable;
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
@@ -12,15 +12,15 @@ import javafx.scene.layout.Pane;
 import java.util.Random;
 
 // a simple enemy TODO make better ones.
-public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
+public class ChasingEnemy extends GameEntity implements Animatable, Interactable {
 
     private Point2D heading;
     private static final int damage = 10;
 
-    public SimpleEnemy(Pane pane) {
+    public ChasingEnemy(Pane pane) {
         super(pane);
 
-        setImage(Globals.simpleEnemy);
+        setImage(Globals.chasingEnemy);
         pane.getChildren().add(this);
         int speed = 1;
         Random rnd = new Random();

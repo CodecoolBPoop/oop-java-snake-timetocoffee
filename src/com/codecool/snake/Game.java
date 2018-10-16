@@ -1,9 +1,11 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.enemies.ChasingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 
 public class Game extends Pane {
@@ -20,10 +22,16 @@ public class Game extends Pane {
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
+
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
+        new ChasingEnemy(this);
     }
 
     public void start() {
         Scene scene = getScene();
+        scene.setFill(Globals.pattern);
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
