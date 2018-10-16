@@ -29,10 +29,10 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-//
-//        double direction = rnd.nextDouble() * 360;
-//        setRotate(direction);
-//        heading = Utils.directionToVector(direction, speed);
+
+        double direction = rnd.nextDouble() * 360;
+        setRotate(direction);
+        heading = Utils.directionToVector(direction, speed);
     }
 
     @Override
@@ -42,13 +42,12 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 
         }
 
-//        GameEntity sneakhead = Globals.getSnakeHead();
-//        Double headingSnakeHeadX = sneakhead.getX()-getX()/ sqrt((getX()*getX()) + getY()*getY())*100;
-//        Double headingSnakeHeadY = sneakhead.getY()-getY()/sqrt((getX()*getX()) + getY()*getY())*100;
-//        setX(getX() + headingSnakeHeadX);
-//        setY(getY() + headingSnakeHeadY);
-        setX(getX() + 1);
-        setY(getY() + 1);
+        GameEntity sneakhead = Globals.getSnakeHead();
+        double length = sqrt((getX() * getX()) + getY() * getY())/2;
+        Double headingSnakeHeadX = (sneakhead.getX()-getX())/ length;
+        Double headingSnakeHeadY = (sneakhead.getY()-getY())/ length;
+        setX(getX() + headingSnakeHeadX);
+        setY(getY() + headingSnakeHeadY);
     }
 
     @Override

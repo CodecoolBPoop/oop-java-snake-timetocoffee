@@ -25,8 +25,7 @@ public class Game extends Pane {
 
         new ChasingEnemy(this);
         new ChasingEnemy(this);
-        new ChasingEnemy(this);
-        new ChasingEnemy(this);
+
     }
 
     public void start() {
