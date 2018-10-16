@@ -19,10 +19,10 @@ public class Globals {
 
     public static Image snakeHead = new Image("Green Witch-48x48.png");
     public static Image snakeBody = new Image("snake_body.png");
-    public static Image simpleEnemy = new Image("Evil Pumpkin-32x32.png");
+    public static Image simpleEnemy = new Image("Bat_small.png");
     public static Image chasingEnemy = new Image("ghost_halloween_23227.png");
     public static Image powerupBerry = new Image("32426-candy-icon.png");
-    public static Image imageBackground = new Image("Halloween_Haunted_Castle_Background.jpg");
+    public static Image imageBackground = new Image("Halloween_Haunted_Castle_Background_crop.png");
     public static ImagePattern pattern = new ImagePattern(imageBackground);
     //.. put here the other images you want to use
 
