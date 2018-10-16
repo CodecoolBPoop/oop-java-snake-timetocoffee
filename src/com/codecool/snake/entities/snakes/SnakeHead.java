@@ -15,7 +15,10 @@ public class SnakeHead extends GameEntity implements Animatable {
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private static int numberOfSnakes = 0;
-    public int snakeId = numberOfSnakes+1;
+    private static int numberOfDeadSnakes = 0;
+
+    private int snakeId = numberOfSnakes+1;
+    public boolean isSnakeAlive = true;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -66,14 +69,29 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
-            System.out.println("Game Over");
-            Globals.gameLoop.stop();
+            this.destroy();
+            for (SnakeBody body : SnakeBody.snakeBodies) {
+                if (body.snakeId == this.snakeId) {
+                    body.destroy();
+                }
+            }
+
+
+
+            numberOfDeadSnakes ++;
+            if (numberOfDeadSnakes == 2) {
+
+                System.out.println("Game Over");
+                Globals.gameLoop.stop();
+            }
         }
     }
 
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
+            newPart.snakeId = this.snakeId;
+            SnakeBody.snakeBodies.add(newPart);
             tail = newPart;
         }
     }
