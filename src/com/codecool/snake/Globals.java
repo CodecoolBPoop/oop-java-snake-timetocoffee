@@ -5,6 +5,7 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,18 +19,22 @@ public class Globals {
     public static Image snakeHead = new Image("Green Witch-48x48.png");
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("Bat_small.png");
-    public static Image chasingEnemy = new Image("ghost_halloween_23227 _128.png");
+    public static Image chasingEnemy = new Image("ghost_halloween_23227.png");
     public static Image powerupBerry = new Image("32426-candy-icon.png");
     public static Image imageBackground = new Image("Halloween_Haunted_Castle_Background_crop.png");
+    public static Image shootingPumpkin = new Image("Evil Pumpkin-24x24.png");
     public static ImagePattern pattern = new ImagePattern(imageBackground);
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
+    public static boolean spaceKeyDown;
     public static List<GameEntity> gameObjects;
     public static List<GameEntity> newGameObjects; // Holds game objects crated in this frame.
     public static List<GameEntity> oldGameObjects; // Holds game objects that will be destroyed this frame.
     public static GameLoop gameLoop;
+
+    public static ArrayList<Integer> listPumpkinDraged;
 
     static {
         gameObjects = new LinkedList<>();

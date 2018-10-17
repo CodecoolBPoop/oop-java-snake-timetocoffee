@@ -15,6 +15,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
 
+    private boolean doDraggedPumpkin = false;
+
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
@@ -25,6 +27,15 @@ public class SnakeHead extends GameEntity implements Animatable {
         pane.getChildren().add(this);
 
         addPart(4);
+    }
+
+    @Override
+    public void setDoDraggedPumpkin(boolean doDraggedPumpkin) {
+        this.doDraggedPumpkin = doDraggedPumpkin;
+    }
+    @Override
+    public boolean isDoDraggedPumpkin() {
+        return doDraggedPumpkin;
     }
 
 
