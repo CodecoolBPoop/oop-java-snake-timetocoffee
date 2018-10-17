@@ -11,8 +11,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.sqrt;
+import static sun.audio.AudioPlayer.player;
 
 // a simple enemy TODO make better ones.
 public class ChasingEnemy extends GameEntity implements Animatable, Interactable {
@@ -26,8 +28,13 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
         super(pane);
 
         setImage(Globals.chasingEnemy);
-        pane.getChildren().add(this);
+
         Random rnd = new Random();
+        //TimeUnit.SECONDS.sleep((rnd.nextInt(19)) +1);
+
+
+
+        pane.getChildren().add(this);
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
@@ -45,14 +52,19 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
             setX(getX() + heading.getX());
             setY(getY() + heading.getY());
         }
-
-        GameEntity sneakhead = Globals.getSnakeHead();
-        double length = sqrt((getX() * getX()) + getY() * getY())/2;
-        Double headingSnakeHeadX = (sneakhead.getX()-getX())/ length;
-        Double headingSnakeHeadY = (sneakhead.getY()-getY())/ length;
-        setX(getX() + headingSnakeHeadX);
-        setY(getY() + headingSnakeHeadY);
+        try {
+            GameEntity sneakhead = Globals.getSnakeHead();
+            double length = sqrt((getX() * getX()) + getY() * getY()) / 2;
+            Double headingSnakeHeadX = (sneakhead.getX() - getX()) / length;
+            Double headingSnakeHeadY = (sneakhead.getY() - getY()) / length;
+            setX(getX() + headingSnakeHeadX);
+            setY(getY() + headingSnakeHeadY);
+        } catch (NullPointerException e) {
+            setX(getX() + heading.getX());
+            setY(getY() + heading.getY());
+        }
     }
+
 
     @Override
     public void apply(SnakeHead player) {

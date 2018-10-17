@@ -1,12 +1,18 @@
 package com.codecool.snake;
 
+import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.ChasingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 public class Game extends Pane {
 
@@ -26,12 +32,15 @@ public class Game extends Pane {
         new SimplePowerup(this);
 
         new ChasingEnemy(this);
+        addButtons();
+        setTableBackground(Globals.imageBackground);
+
+
 
     }
 
     public void start() {
         Scene scene = getScene();
-        scene.setFill(Globals.pattern);
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
@@ -52,4 +61,42 @@ public class Game extends Pane {
         Globals.gameLoop = new GameLoop();
         Globals.gameLoop.start();
     }
+
+    public void addButtons() {
+
+        Button restartBtn = new Button("Restart");
+
+        restartBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                System.out.println("Accepted");
+                restartGame();
+            }
+        });
+
+        this.getChildren().add(restartBtn);
+    }
+
+    public void setTableBackground(Image tableBackground) {
+        setBackground(new Background(new BackgroundImage(tableBackground,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                BackgroundPosition.CENTER, BackgroundSize.DEFAULT)));
+
+    }
+
+    public void restartGame() {
+
+
+        for (GameEntity gameObject: Globals.gameObjects) {
+
+            gameObject.destroy();
+        }
+        SnakeHead.setNumberOfSnakes(0);
+        SnakeHead.setNumberOfDeadSnakes(0);
+        Game game = new Game();
+        Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
+        Globals.gameLoop.stop();
+        game.start();
+
+    }
+
 }

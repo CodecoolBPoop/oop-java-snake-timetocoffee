@@ -100,4 +100,12 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void changeHealth(int diff) {
         health += diff;
     }
+
+    public static void setNumberOfSnakes(int numberOfSnakes) {
+        SnakeHead.numberOfSnakes = numberOfSnakes;
+    }
+
+    public static void setNumberOfDeadSnakes(int numberOfDeadSnakes) {
+        SnakeHead.numberOfDeadSnakes = numberOfDeadSnakes;
+    }
 }

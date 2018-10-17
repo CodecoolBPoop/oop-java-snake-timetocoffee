@@ -4,6 +4,7 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.stage.Stage;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -14,6 +15,7 @@ public class Globals {
 
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
+    public static  Stage stage;
 
     public static Image snakeHead = new Image("Green Witch-48x48 (1).png");
     public static Image snakeBody = new Image("snake_body.png");
@@ -21,7 +23,6 @@ public class Globals {
     public static Image chasingEnemy = new Image("ghost_halloween_23227 _128.png");
     public static Image powerupBerry = new Image("32426-candy-icon.png");
     public static Image imageBackground = new Image("Halloween_Haunted_Castle_Background_crop.png");
-    public static ImagePattern pattern = new ImagePattern(imageBackground);
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
