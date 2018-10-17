@@ -24,7 +24,6 @@ public class Game extends Pane {
         new SimplePowerup(this);
 
         new ChasingEnemy(this);
-        new ChasingEnemy(this);
 
     }
 

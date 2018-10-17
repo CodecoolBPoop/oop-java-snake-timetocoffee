@@ -19,18 +19,19 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
 
     private Point2D heading;
     private static final int damage = 10;
+    double direction;
+    int speed = 1;
 
     public ChasingEnemy(Pane pane) {
         super(pane);
 
         setImage(Globals.chasingEnemy);
         pane.getChildren().add(this);
-        int speed = 1;
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
 
-        double direction = rnd.nextDouble() * 360;
+        direction = rnd.nextDouble() * 360;
         setRotate(direction);
         heading = Utils.directionToVector(direction, speed);
     }
@@ -38,8 +39,11 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
     @Override
     public void step() {
         if (isOutOfBounds()) {
-//            destroy();
-
+            direction += 180;
+            setRotate(direction);
+            heading = Utils.directionToVector(direction, speed);
+            setX(getX() + heading.getX());
+            setY(getY() + heading.getY());
         }
 
         GameEntity sneakhead = Globals.getSnakeHead();
