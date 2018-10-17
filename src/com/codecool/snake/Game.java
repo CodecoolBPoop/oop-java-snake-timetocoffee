@@ -11,7 +11,9 @@ import javafx.scene.layout.Pane;
 public class Game extends Pane {
 
     public Game() {
-        new SnakeHead(this, 500, 500);
+        new SnakeHead(this, 750, 500);
+        new SnakeHead(this, 250, 500);
+
 
         new SimpleEnemy(this);
         new SimpleEnemy(this);
@@ -34,6 +36,8 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = true; break;
                 case RIGHT: Globals.rightKeyDown  = true; break;
+                case A: Globals.aKeyDown = true; break;
+                case S: Globals.sKeyDown = true; break;
             }
         });
 
@@ -41,6 +45,8 @@ public class Game extends Pane {
             switch (event.getCode()) {
                 case LEFT:  Globals.leftKeyDown  = false; break;
                 case RIGHT: Globals.rightKeyDown  = false; break;
+                case A: Globals.aKeyDown = false; break;
+                case S: Globals.sKeyDown = false; break;
             }
         });
         Globals.gameLoop = new GameLoop();

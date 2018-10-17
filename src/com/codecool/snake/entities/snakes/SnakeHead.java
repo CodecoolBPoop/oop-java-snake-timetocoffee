@@ -14,6 +14,11 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
+    private static int numberOfSnakes = 0;
+    private static int numberOfDeadSnakes = 0;
+
+    private int snakeId = numberOfSnakes+1;
+    public boolean isSnakeAlive = true;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -21,6 +26,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(yc);
         health = 100;
         tail = this;
+        numberOfSnakes ++;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
 
@@ -30,11 +36,20 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void step() {
         double dir = getRotate();
-        if (Globals.leftKeyDown) {
-            dir = dir - turnRate;
-        }
-        if (Globals.rightKeyDown) {
-            dir = dir + turnRate;
+        if (snakeId == 1) {
+            if (Globals.leftKeyDown) {
+                dir = dir - turnRate;
+            }
+            if (Globals.rightKeyDown) {
+                dir = dir + turnRate;
+            }
+        } else {
+            if (Globals.aKeyDown) {
+                dir = dir - turnRate;
+            }
+            if (Globals.sKeyDown) {
+                dir = dir + turnRate;
+            }
         }
         // set rotation and position
         setRotate(dir);
@@ -55,14 +70,29 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
-            System.out.println("Game Over");
-            Globals.gameLoop.stop();
+            this.destroy();
+            for (SnakeBody body : SnakeBody.snakeBodies) {
+                if (body.snakeId == this.snakeId) {
+                    body.destroy();
+                }
+            }
+
+
+
+            numberOfDeadSnakes ++;
+            if (numberOfDeadSnakes == 2) {
+
+                System.out.println("Game Over");
+                Globals.gameLoop.stop();
+            }
         }
     }
 
     public void addPart(int numParts) {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
+            newPart.snakeId = this.snakeId;
+            SnakeBody.snakeBodies.add(newPart);
             tail = newPart;
         }
     }
