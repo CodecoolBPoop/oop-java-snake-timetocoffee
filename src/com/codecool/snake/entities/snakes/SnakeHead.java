@@ -31,7 +31,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         health = 100;
         tail = this;
         Globals.numberOfSnakes ++;
-        setImage(Globals.snakeHead);
+        setImage(Globals.snakeHeads.get(Globals.numberOfSnakes-1));
         pane.getChildren().add(this);
 
         addPart(4);

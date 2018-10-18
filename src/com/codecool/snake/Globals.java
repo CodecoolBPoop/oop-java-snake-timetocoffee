@@ -18,7 +18,10 @@ public class Globals {
     public static final double WINDOW_HEIGHT = 700;
     public static  Stage stage;
 
-    public static Image snakeHead = new Image("Green Witch-48x48 (1).png");
+    public static List<Image> snakeHeads = new ArrayList<Image>() {{
+      add(new Image("Green Witch-48x48 (1).png"));
+      add(new Image("Wizards Hat-48x48.png"));
+    }};
     public static Image snakeBody = new Image("snake_body.png");
     public static Image simpleEnemy = new Image("Bat_small.png");
     public static Image chasingEnemy = new Image("ghost_halloween_23227 _128.png");
