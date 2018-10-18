@@ -15,8 +15,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
-    private static int numberOfSnakes = 0;
-    private int snakeId = numberOfSnakes+1;
+    private int snakeId = Globals.numberOfSnakes+1;
 
 
     private static int numberOfDeadSnakes = 0;
@@ -32,7 +31,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(yc);
         health = 100;
         tail = this;
-        numberOfSnakes ++;
+        Globals.numberOfSnakes ++;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
 
@@ -87,6 +86,8 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             if (this.snakeId == 1) {
                 Globals.lengthOfWitchSnake=this.lengthOfTail;
+            } else {
+                Globals.lengthOfWizardSnake=this.lengthOfTail;
             }
             this.destroy();
             for (SnakeBody body : SnakeBody.snakeBodies) {
@@ -119,9 +120,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         health += diff;
     }
 
-    public static void setNumberOfSnakes(int numberOfSnakes) {
-        SnakeHead.numberOfSnakes = numberOfSnakes;
-    }
+
 
     public static void setNumberOfDeadSnakes(int numberOfDeadSnakes) {
         SnakeHead.numberOfDeadSnakes = numberOfDeadSnakes;

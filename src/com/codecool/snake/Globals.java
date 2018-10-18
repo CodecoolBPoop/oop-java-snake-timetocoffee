@@ -41,7 +41,8 @@ public class Globals {
     public static boolean isGameover = false;
 
     public static int lengthOfWitchSnake;
-    public static int getLengthOfWizardSnake;
+    public static int lengthOfWizardSnake;
+    public static int numberOfSnakes = 0;
 
     static {
         gameObjects = new LinkedList<>();
