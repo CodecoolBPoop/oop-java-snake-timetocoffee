@@ -40,6 +40,9 @@ public class Globals {
     public static ArrayList<Integer> listPumpkinDraged;
     public static boolean isGameover = false;
 
+    public static int lengthOfWitchSnake;
+    public static int getLengthOfWizardSnake;
+
     static {
         gameObjects = new LinkedList<>();
         newGameObjects = new LinkedList<>();

@@ -20,7 +20,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
 
     private static int numberOfDeadSnakes = 0;
-    private static int lengthOfTail = 4;
+    private int lengthOfTail = 4;
 
     public boolean isSnakeAlive = true;
 
@@ -85,6 +85,9 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
+            if (this.snakeId == 1) {
+                Globals.lengthOfWitchSnake=this.lengthOfTail;
+            }
             this.destroy();
             for (SnakeBody body : SnakeBody.snakeBodies) {
                 if (body.snakeId == this.snakeId) {
@@ -124,11 +127,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         SnakeHead.numberOfDeadSnakes = numberOfDeadSnakes;
     }
 
-    public static void addLengthOfTail(int lengthToAdd) {
-        SnakeHead.lengthOfTail = SnakeHead.lengthOfTail + lengthToAdd;
+    public void addLengthOfTail(int lengthToAdd) {
+        lengthOfTail = lengthOfTail + lengthToAdd;
     }
 
-    public static int getLengthOfTail() {
-        return lengthOfTail;
-    }
+
 }

@@ -64,7 +64,7 @@ public class Game extends Pane {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("GameOver");
         alert.setHeaderText("Information Alert");
-        String s ="This is an example of JavaFX 8 Dialogs... ";
+        String s = "" + Globals.lengthOfWitchSnake;
         alert.setContentText(s);
         alert.show();
 
