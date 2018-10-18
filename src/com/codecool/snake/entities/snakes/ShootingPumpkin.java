@@ -48,6 +48,7 @@ public class ShootingPumpkin extends GameEntity implements Animatable {
 
     @Override
     public void step() {
+
         if (isShotPumpkin) {
             speed= 5;
             Point2D heading = Utils.directionToVector(getRotate(), speed);
