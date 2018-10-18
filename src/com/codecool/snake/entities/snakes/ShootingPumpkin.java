@@ -18,13 +18,56 @@ import java.util.Random;
 
 public class ShootingPumpkin extends GameEntity implements Animatable {
 
-    private Integer pumpkinId = 0;
-    private List<Integer> listPumpkinDraged = new ArrayList<>();
+    private static Integer numberOfPumpkin = 0;
+    private Integer pumkinId = numberOfPumpkin + 1;
     private int speed;
+    private boolean isDraggedPumpkin = false;
+    private boolean isShotPumpkin = false;
 
+    public Integer getPumkinId() {
+        return pumkinId;
+    }
 
-    public int getPumpkinId() {
-        return pumpkinId;
+    public boolean isDraggedPumpkin() {
+        return isDraggedPumpkin;
+    }
+
+    public void setDoDraggedPumpkin(boolean draggedPumpkin) {
+        isDraggedPumpkin = draggedPumpkin;
+    }
+
+    public boolean isShotPumpkin() {
+        return isShotPumpkin;
+    }
+
+    public void setShotPumpkin(boolean shotPumpkin) {
+        isShotPumpkin = shotPumpkin;
+    }
+
+    @Override
+    public void step() {
+        try {
+            GameEntity snakehead = Globals.getSnakeHead();
+            if (isDraggedPumpkin) {
+                setX(snakehead.getX());
+                setY(snakehead.getY());
+            } else if (isShotPumpkin) {
+                flyingPumpkin(snakehead);
+            }
+        } catch (Exception e) {
+            speed = 0;
+        }
+    }
+
+    public void flyingPumpkin( GameEntity snakehead) {
+
+        speed = 1;
+        do {
+            System.out.println("yeee");
+            Point2D heading = Utils.directionToVector(snakehead.getRotate(), speed);
+            setX(getX() + heading.getX());
+            setY(getY() + heading.getY());
+        } while (this.isOutOfBounds());
     }
 
     public ShootingPumpkin(Pane pane) {
@@ -34,38 +77,6 @@ public class ShootingPumpkin extends GameEntity implements Animatable {
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
         setImage(Globals.shootingPumpkin);
         pane.getChildren().add(this);
-        pumpkinId++;
-    }
-
-
-
-    @Override
-    public void step() {
-        GameEntity snakehead = Globals.getSnakeHead();
-
-        if (getBoundsInParent().intersects(snakehead.getBoundsInParent()) && !snakehead.isDoDraggedPumpkin()) {
-            listPumpkinDraged.add(pumpkinId);
-            setX(snakehead.getX());
-            setY(snakehead.getY());
-            if (Globals.spaceKeyDown) {
-                snakehead.setDoDraggedPumpkin(true);
-               listPumpkinDraged.remove(pumpkinId);
-
-               flyingPumpkin(snakehead);
-            }
-        }
-    }
-
-    public void flyingPumpkin( GameEntity snakehead) {
-
-        speed = 1;
-        do {
-            System.out.println("yeee");
-
-            Point2D heading = Utils.directionToVector(snakehead.getRotate(), speed);
-            setX(getX() + heading.getX());
-            setY(getY() + heading.getY());
-        } while (!this.isOutOfBounds());
     }
 
 }

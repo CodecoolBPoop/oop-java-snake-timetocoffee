@@ -10,6 +10,7 @@ public abstract class GameEntity extends ImageView {
 
     protected boolean doDraggedPumpkin;
     protected boolean isOutOfBounds;
+    protected Integer pumkinId;
     protected Pane pane;
 
     protected GameEntity(Pane pane) {
@@ -39,5 +40,9 @@ public abstract class GameEntity extends ImageView {
 
     public boolean isDoDraggedPumpkin() {
         return doDraggedPumpkin;
+    }
+
+    public Integer getPumkinId() {
+        return pumkinId;
     }
 }

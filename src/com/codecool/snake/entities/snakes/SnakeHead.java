@@ -8,6 +8,9 @@ import com.codecool.snake.entities.Interactable;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static final float speed = 2;
@@ -20,7 +23,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int snakeId = numberOfSnakes+1;
     public boolean isSnakeAlive = true;
 
-    private boolean doDraggedPumpkin = false;
+    private List<Integer> listPumpkinDragged = new ArrayList<>();
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -33,15 +36,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         pane.getChildren().add(this);
 
         addPart(4);
-    }
-
-    @Override
-    public void setDoDraggedPumpkin(boolean doDraggedPumpkin) {
-        this.doDraggedPumpkin = doDraggedPumpkin;
-    }
-    @Override
-    public boolean isDoDraggedPumpkin() {
-        return doDraggedPumpkin;
     }
 
     @Override
@@ -97,6 +91,8 @@ public class SnakeHead extends GameEntity implements Animatable {
                 Globals.gameLoop.stop();
             }
         }
+
+        pumpkinDragAndShoot();
     }
 
     public void addPart(int numParts) {
@@ -119,4 +115,25 @@ public class SnakeHead extends GameEntity implements Animatable {
     public static void setNumberOfDeadSnakes(int numberOfDeadSnakes) {
         SnakeHead.numberOfDeadSnakes = numberOfDeadSnakes;
     }
+
+    public void pumpkinDragAndShoot() {
+        for (GameEntity entity : Globals.getGameObjects()) {
+            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
+                if (entity instanceof ShootingPumpkin && !((ShootingPumpkin) entity).isDraggedPumpkin() && !((ShootingPumpkin) entity).isShotPumpkin()) {
+                   entity.setDoDraggedPumpkin(true);
+                   listPumpkinDragged.add(entity.getPumkinId());
+                }
+            }
+        }
+
+        if (Globals.spaceKeyDown && listPumpkinDragged.size() > 0) {
+            for (GameEntity entity : Globals.getGameObjects()) {
+                if (entity instanceof ShootingPumpkin && entity.getPumkinId() == listPumpkinDragged.get(listPumpkinDragged.size() - 1)) {
+                    ((ShootingPumpkin) entity).setShotPumpkin(true);
+                    listPumpkinDragged.remove(listPumpkinDragged.size() - 1);
+                }
+            }
+        }
+    }
+
 }
