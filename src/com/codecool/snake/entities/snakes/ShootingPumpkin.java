@@ -4,6 +4,8 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.enemies.ChasingEnemy;
+import com.codecool.snake.entities.enemies.SimpleEnemy;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
@@ -19,7 +21,7 @@ import java.util.Random;
 public class ShootingPumpkin extends GameEntity implements Animatable {
 
     private static Integer numberOfPumpkin = 0;
-    private Integer pumkinId = numberOfPumpkin + 1;
+    private Integer pumkinId = numberOfPumpkin++;
     private int speed;
     private boolean isDraggedPumpkin = false;
     private boolean isShotPumpkin = false;
@@ -48,11 +50,13 @@ public class ShootingPumpkin extends GameEntity implements Animatable {
     public void step() {
         try {
             GameEntity snakehead = Globals.getSnakeHead();
-            if (isDraggedPumpkin) {
+            if (isDraggedPumpkin && !isShotPumpkin) {
                 setX(snakehead.getX());
                 setY(snakehead.getY());
+                setRotate(snakehead.getRotate());
             } else if (isShotPumpkin) {
                 flyingPumpkin(snakehead);
+                enemyDestroy();
             }
         } catch (Exception e) {
             speed = 0;
@@ -64,7 +68,7 @@ public class ShootingPumpkin extends GameEntity implements Animatable {
         speed = 1;
         do {
             System.out.println("yeee");
-            Point2D heading = Utils.directionToVector(snakehead.getRotate(), speed);
+            Point2D heading = Utils.directionToVector(getRotate(), speed);
             setX(getX() + heading.getX());
             setY(getY() + heading.getY());
         } while (this.isOutOfBounds());
@@ -79,4 +83,18 @@ public class ShootingPumpkin extends GameEntity implements Animatable {
         pane.getChildren().add(this);
     }
 
+    public void handleShoot(GameEntity enemy) {
+        enemy.destroy();
+        destroy();
+    }
+
+    public void enemyDestroy() {
+        for (GameEntity entity : Globals.getGameObjects()) {
+            if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
+                if (entity instanceof ChasingEnemy || entity instanceof SimpleEnemy) {
+                    handleShoot(entity);
+                }
+            }
+        }
+    }
 }

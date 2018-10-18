@@ -120,14 +120,19 @@ public class SnakeHead extends GameEntity implements Animatable {
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof ShootingPumpkin && !((ShootingPumpkin) entity).isDraggedPumpkin() && !((ShootingPumpkin) entity).isShotPumpkin()) {
-                   entity.setDoDraggedPumpkin(true);
-                   listPumpkinDragged.add(entity.getPumkinId());
+                    ((ShootingPumpkin) entity).setDoDraggedPumpkin(true);
+                   listPumpkinDragged.add(((ShootingPumpkin) entity).getPumkinId());
                 }
             }
-            if (Globals.spaceKeyDown && listPumpkinDragged.size() > 0) {
-                if (entity instanceof ShootingPumpkin && entity.getPumkinId() == listPumpkinDragged.get(listPumpkinDragged.size() - 1)) {
+        }
+
+        if (Globals.spaceKeyDown && listPumpkinDragged.size() > 0) {
+            for (GameEntity entity : Globals.getGameObjects()) {
+                if (entity instanceof ShootingPumpkin && !listPumpkinDragged.isEmpty() && ((ShootingPumpkin) entity).getPumkinId() == listPumpkinDragged.get(listPumpkinDragged.size() - 1)) {
                     ((ShootingPumpkin) entity).setShotPumpkin(true);
-                    listPumpkinDragged.remove(listPumpkinDragged.size() - 1);
+                    ((ShootingPumpkin) entity).setDoDraggedPumpkin(false);
+                    listPumpkinDragged.remove(((ShootingPumpkin) entity).getPumkinId());
+                    break;
                 }
             }
         }
