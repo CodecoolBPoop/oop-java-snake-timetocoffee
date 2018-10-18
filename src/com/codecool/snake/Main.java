@@ -12,8 +12,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        Globals.stage = primaryStage;
         Game game = new Game();
 
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Snake Game");
         primaryStage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
         primaryStage.show();
