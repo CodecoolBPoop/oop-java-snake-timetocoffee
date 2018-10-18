@@ -32,7 +32,8 @@ public class Globals {
 
     public static boolean leftKeyDown;
     public static boolean rightKeyDown;
-    public static boolean spaceKeyDown;
+    public static boolean xKeyDown;
+    public static boolean pKeyDown;
     public static boolean aKeyDown;
     public static boolean sKeyDown;
     public static List<GameEntity> gameObjects;
