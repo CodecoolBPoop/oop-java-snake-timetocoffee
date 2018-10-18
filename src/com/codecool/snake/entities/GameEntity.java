@@ -1,12 +1,14 @@
 package com.codecool.snake.entities;
 
 import com.codecool.snake.Globals;
+import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 // The base class for every game entity.
 public abstract class GameEntity extends ImageView {
 
+    protected boolean doDraggBounds;
     protected Pane pane;
 
     protected GameEntity(Pane pane) {
