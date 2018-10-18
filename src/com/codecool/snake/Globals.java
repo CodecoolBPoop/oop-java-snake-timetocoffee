@@ -38,6 +38,7 @@ public class Globals {
     public static GameLoop gameLoop;
 
     public static ArrayList<Integer> listPumpkinDraged;
+    public static boolean isGameover = false;
 
     static {
         gameObjects = new LinkedList<>();

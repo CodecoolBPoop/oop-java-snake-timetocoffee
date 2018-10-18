@@ -10,10 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import javax.swing.*;
 
 public class Game extends Pane {
 
@@ -43,6 +46,27 @@ public class Game extends Pane {
         new ShootingPumpkin(this);
         new ShootingPumpkin(this);
         new ShootingPumpkin(this);
+
+    }
+
+    public static void handleGameover() {
+        System.out.println("Game Over");
+        Globals.gameLoop.stop();
+        showGameoverDialog();
+//        JOptionPane.showMessageDialog(frame,
+//                "Eggs are not supposed to be green.",
+//                "Inane custom dialog",
+//                JOptionPane.INFORMATION_MESSAGE,
+//                icon);
+    }
+
+    private static void showGameoverDialog() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("GameOver");
+        alert.setHeaderText("Information Alert");
+        String s ="This is an example of JavaFX 8 Dialogs... ";
+        alert.setContentText(s);
+        alert.show();
 
     }
 
@@ -79,7 +103,7 @@ public class Game extends Pane {
 
         restartBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                System.out.println("Accepted");
+                System.out.println("Restarted");
                 restartGame();
             }
         });

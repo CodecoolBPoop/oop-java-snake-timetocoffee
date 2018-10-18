@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.Game;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -92,9 +93,9 @@ public class SnakeHead extends GameEntity implements Animatable {
 
             numberOfDeadSnakes ++;
             if (numberOfDeadSnakes == 2) {
+                Globals.isGameover = true;
 
-                System.out.println("Game Over");
-                Globals.gameLoop.stop();
+
             }
         }
     }

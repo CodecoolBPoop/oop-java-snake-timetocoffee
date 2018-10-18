@@ -49,7 +49,7 @@ public class ShootingPumpkin extends GameEntity implements Animatable {
             setY(snakehead.getY());
             if (Globals.spaceKeyDown) {
                 snakehead.setDoDraggedPumpkin(true);
-               listPumpkinDraged.remove(pumpkinId);
+       //        listPumpkinDraged.remove(pumpkinId);
 
                flyingPumpkin(snakehead);
             }
