@@ -8,15 +8,11 @@ import com.codecool.snake.entities.snakes.ShootingPumpkin;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
-
-import javax.swing.*;
 
 public class Game extends Pane {
 
@@ -53,18 +49,21 @@ public class Game extends Pane {
         System.out.println("Game Over");
         Globals.gameLoop.stop();
         showGameoverDialog();
-//        JOptionPane.showMessageDialog(frame,
-//                "Eggs are not supposed to be green.",
-//                "Inane custom dialog",
-//                JOptionPane.INFORMATION_MESSAGE,
-//                icon);
+    }
+
+    private static String decideWinner() {
+        if (Globals.lengthOfWitchSnakeId1 == Globals.lengthOfWizardSnakeId2) {
+            return Globals.winnerByLifeLength;
+       }
+        return Globals.lengthOfWitchSnakeId1 > Globals.lengthOfWizardSnakeId2 ? "Witch": "Wizard";
     }
 
     private static void showGameoverDialog() {
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("GameOver");
-        alert.setHeaderText("Information Alert");
-        String s = "" + Globals.lengthOfWitchSnake;
+        alert.setHeaderText("The winner is:" + decideWinner());
+        String s = "The length of snakes\nWitch: " + Globals.lengthOfWitchSnakeId1 +"\nWizard: " + Globals.lengthOfWizardSnakeId2;
         alert.setContentText(s);
         alert.show();
 

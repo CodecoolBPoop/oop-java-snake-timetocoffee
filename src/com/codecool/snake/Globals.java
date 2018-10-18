@@ -40,9 +40,11 @@ public class Globals {
     public static ArrayList<Integer> listPumpkinDraged;
     public static boolean isGameover = false;
 
-    public static int lengthOfWitchSnake;
-    public static int lengthOfWizardSnake;
+    public static int lengthOfWitchSnakeId1;
+    public static int lengthOfWizardSnakeId2;
     public static int numberOfSnakes = 0;
+    public static String winnerByLifeLength;
+
 
     static {
         gameObjects = new LinkedList<>();

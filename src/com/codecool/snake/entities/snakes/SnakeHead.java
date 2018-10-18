@@ -1,6 +1,5 @@
 package com.codecool.snake.entities.snakes;
 
-import com.codecool.snake.Game;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -19,7 +18,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
 
     private static int numberOfDeadSnakes = 0;
-    private int lengthOfTail = 4;
+    private int lengthOfTail = 0;
 
     public boolean isSnakeAlive = true;
 
@@ -84,10 +83,13 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
+            if (numberOfDeadSnakes == 1) {
+                Globals.winnerByLifeLength = this.snakeId == 1 ? "Witch": "Wizard";
+            }
             if (this.snakeId == 1) {
-                Globals.lengthOfWitchSnake=this.lengthOfTail;
+                Globals.lengthOfWitchSnakeId1 =this.lengthOfTail;
             } else {
-                Globals.lengthOfWizardSnake=this.lengthOfTail;
+                Globals.lengthOfWizardSnakeId2 =this.lengthOfTail;
             }
             this.destroy();
             for (SnakeBody body : SnakeBody.snakeBodies) {
@@ -113,6 +115,8 @@ public class SnakeHead extends GameEntity implements Animatable {
             newPart.snakeId = this.snakeId;
             SnakeBody.snakeBodies.add(newPart);
             tail = newPart;
+            this.lengthOfTail++;
+
         }
     }
 
@@ -126,9 +130,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         SnakeHead.numberOfDeadSnakes = numberOfDeadSnakes;
     }
 
-    public void addLengthOfTail(int lengthToAdd) {
-        lengthOfTail = lengthOfTail + lengthToAdd;
-    }
+//    public void addLengthOfTail(int lengthToAdd) {
+//        lengthOfTail = lengthOfTail + lengthToAdd;
+//    }
 
 
 }
