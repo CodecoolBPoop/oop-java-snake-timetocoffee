@@ -76,7 +76,7 @@ public class Game extends Pane {
                 case LEFT:  Globals.leftKeyDown  = false; break;
                 case RIGHT: Globals.rightKeyDown  = false; break;
                 case X: Globals.xKeyDown = false; break;
-                case X: Globals.pKeyDown = false; break;
+                case P: Globals.pKeyDown = false; break;
                 case A: Globals.aKeyDown = false; break;
                 case S: Globals.sKeyDown = false; break;
             }
