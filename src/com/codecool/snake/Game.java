@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.ChasingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.powerups.DoublePowerup;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.ShootingPumpkin;
 import com.codecool.snake.entities.snakes.SnakeHead;
@@ -20,28 +21,16 @@ public class Game extends Pane {
         new SnakeHead(this, 750, 500);
         new SnakeHead(this, 250, 500);
 
-
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
+        for (int i = 0; i < 4; i++) {
+            new SimpleEnemy(this);
+            new SimplePowerup(this);
+            new ShootingPumpkin(this);
+            new DoublePowerup(this);
+        }
 
         new ChasingEnemy(this);
         addButtons();
         setTableBackground(Globals.imageBackground);
-
-
-
-        new ShootingPumpkin(this);
-        new ShootingPumpkin(this);
-        new ShootingPumpkin(this);
-        new ShootingPumpkin(this);
-        new ShootingPumpkin(this);
 
     }
 
