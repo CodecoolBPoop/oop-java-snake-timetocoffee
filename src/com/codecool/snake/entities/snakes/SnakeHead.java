@@ -16,9 +16,12 @@ public class SnakeHead extends GameEntity implements Animatable {
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private static int numberOfSnakes = 0;
-    private static int numberOfDeadSnakes = 0;
-
     private int snakeId = numberOfSnakes+1;
+
+
+    private static int numberOfDeadSnakes = 0;
+    private static int lengthOfTail = 4;
+
     public boolean isSnakeAlive = true;
 
     private boolean doDraggedPumpkin = false;
@@ -119,5 +122,13 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public static void setNumberOfDeadSnakes(int numberOfDeadSnakes) {
         SnakeHead.numberOfDeadSnakes = numberOfDeadSnakes;
+    }
+
+    public static void addLengthOfTail(int lengthToAdd) {
+        SnakeHead.lengthOfTail = SnakeHead.lengthOfTail + lengthToAdd;
+    }
+
+    public static int getLengthOfTail() {
+        return lengthOfTail;
     }
 }
