@@ -30,10 +30,6 @@ public class ChasingEnemy extends GameEntity implements Animatable, Interactable
         setImage(Globals.chasingEnemy);
 
         Random rnd = new Random();
-        //TimeUnit.SECONDS.sleep((rnd.nextInt(19)) +1);
-
-
-
         pane.getChildren().add(this);
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);

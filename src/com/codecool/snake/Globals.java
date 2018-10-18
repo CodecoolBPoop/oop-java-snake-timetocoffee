@@ -47,6 +47,7 @@ public class Globals {
     public static int lengthOfWizardSnakeId2;
     public static int numberOfSnakes = 0;
     public static String winnerByLifeLength;
+    public static Image candy2 = new Image("Witch's Cauldron-32x32.png");
 
 
     static {
