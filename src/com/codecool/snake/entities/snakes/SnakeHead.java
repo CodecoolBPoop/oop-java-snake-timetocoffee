@@ -124,10 +124,7 @@ public class SnakeHead extends GameEntity implements Animatable {
                    listPumpkinDragged.add(entity.getPumkinId());
                 }
             }
-        }
-
-        if (Globals.spaceKeyDown && listPumpkinDragged.size() > 0) {
-            for (GameEntity entity : Globals.getGameObjects()) {
+            if (Globals.spaceKeyDown && listPumpkinDragged.size() > 0) {
                 if (entity instanceof ShootingPumpkin && entity.getPumkinId() == listPumpkinDragged.get(listPumpkinDragged.size() - 1)) {
                     ((ShootingPumpkin) entity).setShotPumpkin(true);
                     listPumpkinDragged.remove(listPumpkinDragged.size() - 1);
@@ -135,5 +132,4 @@ public class SnakeHead extends GameEntity implements Animatable {
             }
         }
     }
-
 }
