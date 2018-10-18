@@ -14,10 +14,12 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
-    private static int numberOfSnakes = 0;
-    private static int numberOfDeadSnakes = 0;
+    private int snakeId = Globals.numberOfSnakes+1;
 
-    private int snakeId = numberOfSnakes+1;
+
+    private static int numberOfDeadSnakes = 0;
+    private int lengthOfTail = 0;
+
     public boolean isSnakeAlive = true;
 
     private boolean doDraggedPumpkin = false;
@@ -28,7 +30,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         setY(yc);
         health = 100;
         tail = this;
-        numberOfSnakes ++;
+        Globals.numberOfSnakes ++;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
 
@@ -81,6 +83,14 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
         if (isOutOfBounds() || health <= 0) {
+            if (numberOfDeadSnakes == 1) {
+                Globals.winnerByLifeLength = this.snakeId == 1 ? "Witch": "Wizard";
+            }
+            if (this.snakeId == 1) {
+                Globals.lengthOfWitchSnakeId1 =this.lengthOfTail;
+            } else {
+                Globals.lengthOfWizardSnakeId2 =this.lengthOfTail;
+            }
             this.destroy();
             for (SnakeBody body : SnakeBody.snakeBodies) {
                 if (body.snakeId == this.snakeId) {
@@ -92,9 +102,9 @@ public class SnakeHead extends GameEntity implements Animatable {
 
             numberOfDeadSnakes ++;
             if (numberOfDeadSnakes == 2) {
+                Globals.isGameover = true;
 
-                System.out.println("Game Over");
-                Globals.gameLoop.stop();
+
             }
         }
     }
@@ -105,6 +115,8 @@ public class SnakeHead extends GameEntity implements Animatable {
             newPart.snakeId = this.snakeId;
             SnakeBody.snakeBodies.add(newPart);
             tail = newPart;
+            this.lengthOfTail++;
+
         }
     }
 
@@ -112,11 +124,15 @@ public class SnakeHead extends GameEntity implements Animatable {
         health += diff;
     }
 
-    public static void setNumberOfSnakes(int numberOfSnakes) {
-        SnakeHead.numberOfSnakes = numberOfSnakes;
-    }
+
 
     public static void setNumberOfDeadSnakes(int numberOfDeadSnakes) {
         SnakeHead.numberOfDeadSnakes = numberOfDeadSnakes;
     }
+
+//    public void addLengthOfTail(int lengthToAdd) {
+//        lengthOfTail = lengthOfTail + lengthToAdd;
+//    }
+
+
 }

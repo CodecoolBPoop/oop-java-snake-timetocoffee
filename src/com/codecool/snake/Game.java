@@ -8,12 +8,11 @@ import com.codecool.snake.entities.snakes.ShootingPumpkin;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 public class Game extends Pane {
 
@@ -43,6 +42,30 @@ public class Game extends Pane {
         new ShootingPumpkin(this);
         new ShootingPumpkin(this);
         new ShootingPumpkin(this);
+
+    }
+
+    public static void handleGameover() {
+        System.out.println("Game Over");
+        Globals.gameLoop.stop();
+        showGameoverDialog();
+    }
+
+    private static String decideWinner() {
+        if (Globals.lengthOfWitchSnakeId1 == Globals.lengthOfWizardSnakeId2) {
+            return Globals.winnerByLifeLength;
+       }
+        return Globals.lengthOfWitchSnakeId1 > Globals.lengthOfWizardSnakeId2 ? "Witch": "Wizard";
+    }
+
+    private static void showGameoverDialog() {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("GameOver");
+        alert.setHeaderText("The winner is:" + decideWinner());
+        String s = "The length of snakes\nWitch: " + Globals.lengthOfWitchSnakeId1 +"\nWizard: " + Globals.lengthOfWizardSnakeId2;
+        alert.setContentText(s);
+        alert.show();
 
     }
 
@@ -79,7 +102,7 @@ public class Game extends Pane {
 
         restartBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
-                System.out.println("Accepted");
+                System.out.println("Restarted");
                 restartGame();
             }
         });
@@ -101,7 +124,7 @@ public class Game extends Pane {
 
             gameObject.destroy();
         }
-        SnakeHead.setNumberOfSnakes(0);
+        Globals.numberOfSnakes = 0;
         SnakeHead.setNumberOfDeadSnakes(0);
         Game game = new Game();
         Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
