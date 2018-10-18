@@ -114,6 +114,8 @@ public class Game extends Pane {
             gameObject.destroy();
         }
         Globals.numberOfSnakes = 0;
+        Globals.isGameover = false;
+
         SnakeHead.setNumberOfDeadSnakes(0);
         Game game = new Game();
         Globals.stage.setScene(new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT));
