@@ -20,6 +20,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int snakeId = numberOfSnakes+1;
     public boolean isSnakeAlive = true;
 
+    private boolean doDraggedPumpkin = false;
+
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
         setX(xc);
@@ -33,7 +35,16 @@ public class SnakeHead extends GameEntity implements Animatable {
         addPart(4);
     }
 
+    @Override
+    public void setDoDraggedPumpkin(boolean doDraggedPumpkin) {
+        this.doDraggedPumpkin = doDraggedPumpkin;
+    }
+    @Override
+    public boolean isDoDraggedPumpkin() {
+        return doDraggedPumpkin;
+    }
 
+    @Override
     public void step() {
         double dir = getRotate();
         if (snakeId == 1) {
