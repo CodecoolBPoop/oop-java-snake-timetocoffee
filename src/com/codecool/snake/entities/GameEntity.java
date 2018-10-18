@@ -8,8 +8,7 @@ import javafx.scene.layout.Pane;
 // The base class for every game entity.
 public abstract class GameEntity extends ImageView {
 
-    protected boolean doDraggedPumpkin;
-    protected boolean isOutOfBounds;
+    protected boolean doDraggBounds;
     protected Pane pane;
 
     protected GameEntity(Pane pane) {
@@ -31,13 +30,5 @@ public abstract class GameEntity extends ImageView {
             return true;
         }
         return false;
-    }
-
-    public void setDoDraggedPumpkin(boolean doDraggedPumpkin) {
-        this.doDraggedPumpkin = doDraggedPumpkin;
-    }
-
-    public boolean isDoDraggedPumpkin() {
-        return doDraggedPumpkin;
     }
 }
