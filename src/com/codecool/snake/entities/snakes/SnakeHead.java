@@ -123,9 +123,12 @@ public class SnakeHead extends GameEntity implements Animatable {
     public void pumpkinDragAndShoot() {
         for (GameEntity entity : Globals.getGameObjects()) {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
-                if (entity instanceof ShootingPumpkin && !((ShootingPumpkin) entity).isDraggedPumpkin() && !((ShootingPumpkin) entity).isShotPumpkin()) {
-                    ((ShootingPumpkin) entity).setDoDraggedPumpkin(true);
-                   listPumpkinDragged.add(((ShootingPumpkin) entity).getPumkinId());
+                if (entity instanceof ShootingPumpkin) {
+                    ShootingPumpkin pumpkin = (ShootingPumpkin) entity;
+                    if (!pumpkin.isDraggedPumpkin() && !pumpkin.isShotPumpkin()) {
+                        pumpkin.setDoDraggedPumpkin(true);
+                        listPumpkinDragged.add(pumpkin.getPumkinId());
+                    }
                 }
             }
         }
